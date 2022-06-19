@@ -24,6 +24,15 @@ int currentDay;
 unsigned long actualTime = 0;
 unsigned long savedTime = 0;
 
+// function used to turn pump on when button is pressed
+void manualTurnOn()
+{
+    digitalWrite(relay, LOW);
+
+    delay(180000);
+    digitalWrite(relay, HIGH);
+} 
+
 void setup()
 {   
     Serial.begin(115200);
@@ -181,13 +190,4 @@ void loop()
                 digitalWrite(relay, HIGH);
             }
         } 
-}  
-
-// function used to turn pump on when button is pressed
-void manualTurnOn()
-{
-    digitalWrite(relay, LOW);
-
-    delay(180000);
-    digitalWrite(relay, HIGH);
-} 
+}

@@ -4,6 +4,9 @@
 #include <WiFiUDP.h>
 #include <secrets.h>
 #include <ArduinoOTA.h>
+#include <ESPAsyncTCP.h>
+#include <ESPAsyncWebServer.h>
+#include <WebSerial.h>
 
 // variable declaring ip address
 IPAddress localIP(192, 168, 1, 201);
@@ -17,6 +20,9 @@ const char* hostname = "flow-pump-controller";
 // variables declaring NTP server
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "pool.ntp.org", 7200);
+
+// variable declaring WebSerial server
+AsyncWebServer server(80);
 
 // variables declaring pin numbers
 const int relay = 5;
@@ -73,6 +79,10 @@ void setup()
     ArduinoOTA.setPassword(ota_password);
 
     ArduinoOTA.begin();
+
+    // initialize WebSerial
+    WebSerial.begin(&server);
+    server.begin();
 }
 
 void loop()

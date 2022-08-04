@@ -46,7 +46,6 @@ void setup()
         Serial.println("Connecting to the Internet...");
     }
     Serial.println("Connected!");
-    WiFi.softAPdisconnect(true);
     
     // start NTP service
     timeClient.begin();

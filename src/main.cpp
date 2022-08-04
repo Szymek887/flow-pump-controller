@@ -4,9 +4,7 @@
 #include <WiFiUDP.h>
 #include <secrets.h>
 #include <ArduinoOTA.h>
-#include <ESPAsyncTCP.h>
-#include <ESPAsyncWebServer.h>
-#include <WebSerial.h>
+#include <ESP8266WebServer.h>
 
 // variable declaring ip address
 IPAddress localIP(192, 168, 1, 201);
@@ -21,8 +19,8 @@ const char* hostname = "flow-pump-controller";
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "pool.ntp.org", 7200);
 
-// variable declaring WebSerial server
-AsyncWebServer server(80);
+// variable declaring api server
+ESP8266WebServer rest_server(8080);
 
 // variables declaring pin numbers
 const int relay = 5;
@@ -43,37 +41,11 @@ unsigned long savedTime = 0;
 // function used to turn pump on when button is pressed
 void manualTurnOn()
 {
-    WebSerial.print(currentHour);
-    WebSerial.print(":");
-    WebSerial.print(currentMinute);
-    WebSerial.println("  ->  Pump manually turned on!");
     digitalWrite(relay, LOW);
 
     delay(180000);
-    WebSerial.print(currentHour);
-    WebSerial.print(":");
-    WebSerial.print(currentMinute);
-    WebSerial.println("  ->  Pump manually turned off!");
     digitalWrite(relay, HIGH);
 } 
-
-// function used to log time of pump being turned on
-void logTurningOn()
-{
-    WebSerial.print(currentHour);
-    WebSerial.print(":");
-    WebSerial.print(currentMinute);
-    WebSerial.println("  ->  Pump is on!");
-}
-
-// function used to log time of pump being turned off
-void logTurningOff()
-{
-    WebSerial.print(currentHour);
-    WebSerial.print(":");
-    WebSerial.print(currentMinute);
-    WebSerial.println("  ->  Pump is off!");
-}
 
 void setup()
 {   
@@ -106,13 +78,16 @@ void setup()
 
     ArduinoOTA.begin();
 
-    // initialize WebSerial
-    WebSerial.begin(&server);
-    server.begin();
+    // initialize api server
+    rest_server.on("/", HTTP_GET, manualTurnOn);
+    rest_server.begin();
 }
 
 void loop()
 {
+    // check for api requests
+    rest_server.handleClient();
+    
     // check for ArduinoOTA updates
     ArduinoOTA.handle();
     
@@ -140,110 +115,84 @@ void loop()
         {  
             if(currentHour == 5 && currentMinute == 45)
             {
-                logTurningOn();
                 digitalWrite(relay, LOW);
             } else if (currentHour == 5 && currentMinute == 48)
             {
-                logTurningOff();
                 digitalWrite(relay, HIGH);
             } else if (currentHour == 7 && currentMinute == 15)
             {
-                logTurningOn();
                 digitalWrite(relay, LOW);
             } else if (currentHour == 7 && currentMinute == 18)
             {
-                logTurningOff();
                 digitalWrite(relay, HIGH);
             } else if (currentHour == 15 && currentMinute == 0)
             {
-                logTurningOn();
                 digitalWrite(relay, LOW);
             } else if (currentHour == 15 && currentMinute == 5)
             {
-                logTurningOff();
                 digitalWrite(relay, HIGH);
             } else if (currentHour == 18 && currentMinute == 0)
             {
-                logTurningOn();
                 digitalWrite(relay, LOW);
             } else if (currentHour == 18 && currentMinute == 3)
             {
-                logTurningOff();
                 digitalWrite(relay, HIGH);
             } else if (currentHour == 20 && currentMinute == 30)
             {
-                logTurningOn();
                 digitalWrite(relay, LOW);
             } else if (currentHour == 20 && currentMinute == 33)
             {
-                logTurningOff();
                 digitalWrite(relay, HIGH);
             } else if (currentHour == 22 && currentMinute == 0)
             {
-                logTurningOn();
                 digitalWrite(relay, LOW);
             } else if (currentHour == 22 && currentMinute == 3)
             {
-                logTurningOff();
                 digitalWrite(relay, HIGH);
             } 
         } else if(currentDay == 0 || currentDay == 6)
         {
             if(currentHour == 6 && currentMinute == 45)
             {
-                logTurningOn();
                 digitalWrite(relay, LOW);
             } else if (currentHour == 6 && currentMinute == 48)
             {
-                logTurningOff();
                 digitalWrite(relay, HIGH);
             } else if (currentHour == 10 && currentMinute == 0)
             {
-                logTurningOn();
                 digitalWrite(relay, LOW);
             } else if (currentHour == 10 && currentMinute == 3)
             {
-                logTurningOff();
                 digitalWrite(relay, HIGH);
             } else if (currentHour == 12 && currentMinute == 0)
             {
-                logTurningOn();
                 digitalWrite(relay, LOW);
             } else if (currentHour == 12 && currentMinute == 3)
             {
-                logTurningOff();
                 digitalWrite(relay, HIGH);
             } else if (currentHour == 15 && currentMinute == 0)
             {
-                logTurningOn();
                 digitalWrite(relay, LOW);
             } else if (currentHour == 15 && currentMinute == 3)
             {
-                logTurningOff();
                 digitalWrite(relay, HIGH);
             } else if (currentHour == 18 && currentMinute == 0)
             {
-                logTurningOn();
                 digitalWrite(relay, LOW);
             } else if (currentHour == 18 && currentMinute == 3)
             {
-                logTurningOff();
                 digitalWrite(relay, HIGH);
             } else if (currentHour == 20 && currentMinute == 0)
             {
-                logTurningOn();
                 digitalWrite(relay, LOW);
             } else if (currentHour == 20 && currentMinute == 3)
             {
-                logTurningOff();
                 digitalWrite(relay, HIGH);
             } else if (currentHour == 22 && currentMinute == 0)
             {
-                logTurningOn();
                 digitalWrite(relay, LOW);
             } else if (currentHour == 22 && currentMinute == 3)
             {
-                logTurningOff();
                 digitalWrite(relay, HIGH);
             }
         } 

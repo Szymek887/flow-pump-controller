@@ -108,22 +108,16 @@ void loop()
             } else if (currentHour == 5 && currentMinute == 48)
             {
                 digitalWrite(relay, HIGH);
-            } else if (currentHour == 6 && currentMinute == 30)
-            {
-                digitalWrite(relay, LOW);
-            } else if (currentHour == 6 && currentMinute == 33)
-            {
-                digitalWrite(relay, HIGH);
             } else if (currentHour == 7 && currentMinute == 15)
             {
                 digitalWrite(relay, LOW);
             } else if (currentHour == 7 && currentMinute == 18)
             {
                 digitalWrite(relay, HIGH);
-            } else if (currentHour == 15 && currentMinute == 30)
+            } else if (currentHour == 15 && currentMinute == 0)
             {
                 digitalWrite(relay, LOW);
-            } else if (currentHour == 15 && currentMinute == 35)
+            } else if (currentHour == 15 && currentMinute == 5)
             {
                 digitalWrite(relay, HIGH);
             } else if (currentHour == 18 && currentMinute == 0)
@@ -132,22 +126,16 @@ void loop()
             } else if (currentHour == 18 && currentMinute == 3)
             {
                 digitalWrite(relay, HIGH);
-            } else if (currentHour == 19 && currentMinute == 0)
-            {
-                digitalWrite(relay, LOW);
-            } else if (currentHour == 19 && currentMinute == 3)
-            {
-                digitalWrite(relay, HIGH);
             } else if (currentHour == 20 && currentMinute == 30)
             {
                 digitalWrite(relay, LOW);
             } else if (currentHour == 20 && currentMinute == 33)
             {
                 digitalWrite(relay, HIGH);
-            } else if (currentHour == 21 && currentMinute == 30)
+            } else if (currentHour == 22 && currentMinute == 0)
             {
                 digitalWrite(relay, LOW);
-            } else if (currentHour == 21 && currentMinute == 33)
+            } else if (currentHour == 22 && currentMinute == 3)
             {
                 digitalWrite(relay, HIGH);
             } 
@@ -157,18 +145,6 @@ void loop()
             {
                 digitalWrite(relay, LOW);
             } else if (currentHour == 6 && currentMinute == 48)
-            {
-                digitalWrite(relay, HIGH);
-            } else if (currentHour == 7 && currentMinute == 30)
-            {
-                digitalWrite(relay, LOW);
-            } else if (currentHour == 7 && currentMinute == 33)
-            {
-                digitalWrite(relay, HIGH);
-            } else if (currentHour == 8 && currentMinute == 30)
-            {
-                digitalWrite(relay, LOW);
-            } else if (currentHour == 8 && currentMinute == 33)
             {
                 digitalWrite(relay, HIGH);
             } else if (currentHour == 10 && currentMinute == 0)
@@ -183,10 +159,10 @@ void loop()
             } else if (currentHour == 12 && currentMinute == 3)
             {
                 digitalWrite(relay, HIGH);
-            } else if (currentHour == 14 && currentMinute == 0)
+            } else if (currentHour == 15 && currentMinute == 0)
             {
                 digitalWrite(relay, LOW);
-            } else if (currentHour == 14 && currentMinute == 3)
+            } else if (currentHour == 15 && currentMinute == 3)
             {
                 digitalWrite(relay, HIGH);
             } else if (currentHour == 18 && currentMinute == 0)
@@ -201,10 +177,10 @@ void loop()
             } else if (currentHour == 20 && currentMinute == 3)
             {
                 digitalWrite(relay, HIGH);
-            } else if (currentHour == 21 && currentMinute == 30)
+            } else if (currentHour == 22 && currentMinute == 0)
             {
                 digitalWrite(relay, LOW);
-            } else if (currentHour == 21 && currentMinute == 33)
+            } else if (currentHour == 22 && currentMinute == 3)
             {
                 digitalWrite(relay, HIGH);
             }

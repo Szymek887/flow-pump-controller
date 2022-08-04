@@ -3,6 +3,16 @@
 #include <NTPClient.h>
 #include <WiFiUDP.h>
 #include <secrets.h>
+#include <ArduinoOTA.h>
+
+// variable declaring ip address
+IPAddress localIP(192, 168, 1, 201);
+IPAddress gateway(192, 168, 1, 1);
+IPAddress subnet(255, 255, 255, 0);
+IPAddress primaryDNS(192, 168, 1, 9);
+IPAddress secondaryDNS(192, 168, 1, 1);
+
+const char* hostname = "flow-pump-controller";
 
 // variables declaring NTP server
 WiFiUDP ntpUDP;
@@ -38,6 +48,7 @@ void setup()
     Serial.begin(115200);
     
     // establish Wi-Fi connection
+    WiFi.config(localIP, gateway, subnet, primaryDNS, secondaryDNS);
     WiFi.mode(WIFI_STA);
     WiFi.begin(wifi_ssid, wifi_password);
     while (WiFi.status() != WL_CONNECTED) 
@@ -56,10 +67,19 @@ void setup()
 
     // turn relay off by default
     digitalWrite(relay, HIGH);
+
+    // initialize remote updates via ArduinoOTA
+    ArduinoOTA.setHostname(hostname);
+    ArduinoOTA.setPassword(ota_password);
+
+    ArduinoOTA.begin();
 }
 
 void loop()
 {
+    // check for ArduinoOTA updates
+    ArduinoOTA.handle();
+    
     // sync time for delay()
     actualTime = millis();
     

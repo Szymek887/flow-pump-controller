@@ -1,7 +1,7 @@
 // include all needed libraries
 #include <ESP8266WiFi.h>
 #include <NTPClient.h>
-#include <WiFiUDP.h>
+#include <WiFiUdp.h>
 #include <secrets.h>
 #include <ArduinoOTA.h>
 #include <ESP8266WebServer.h>

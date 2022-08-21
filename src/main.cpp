@@ -7,11 +7,11 @@
 #include <ESP8266WebServer.h>
 
 // variable declaring ip address
-IPAddress localIP(192, 168, 1, 201);
-IPAddress gateway(192, 168, 1, 1);
+IPAddress localIP(10, 0, 8, 71);
+IPAddress gateway(10, 0, 8, 1);
 IPAddress subnet(255, 255, 255, 0);
-IPAddress primaryDNS(192, 168, 1, 9);
-IPAddress secondaryDNS(192, 168, 1, 1);
+IPAddress primaryDNS(10, 0, 8, 10);
+IPAddress secondaryDNS(10, 0, 8, 1);
 
 const char* hostname = "flow-pump-controller";
 

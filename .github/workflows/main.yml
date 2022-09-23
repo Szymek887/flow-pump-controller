@@ -17,6 +17,12 @@ jobs:
       with:
         submodules: 'true'
     
+    - name: Rename platformio.ini
+      run: mv platformio.ini.example platformio.ini
+
+    - name: Rename Secrets.h
+      run: mv src/Secrets.h.example src/Secrets.h
+
     - name: Set up Python
       uses: actions/setup-python@v1
     

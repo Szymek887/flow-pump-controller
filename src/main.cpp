@@ -141,16 +141,28 @@ void loop()
             } else if (currentHour == 18 && currentMinute == 3)
             {
                 digitalWrite(relay, HIGH);
+            } else if (currentHour == 18 && currentMinute == 30)
+            {
+                digitalWrite(relay, LOW);
+            } else if (currentHour == 18 && currentMinute == 33)
+            {
+                digitalWrite(relay, HIGH);
+            } else if (currentHour == 18 && currentMinute == 45)
+            {
+                digitalWrite(relay, LOW);
+            } else if (currentHour == 18 && currentMinute == 48)
+            {
+                digitalWrite(relay, HIGH);
             } else if (currentHour == 20 && currentMinute == 30)
             {
                 digitalWrite(relay, LOW);
             } else if (currentHour == 20 && currentMinute == 33)
             {
                 digitalWrite(relay, HIGH);
-            } else if (currentHour == 22 && currentMinute == 0)
+            } else if (currentHour == 22 && currentMinute == 45)
             {
                 digitalWrite(relay, LOW);
-            } else if (currentHour == 22 && currentMinute == 3)
+            } else if (currentHour == 22 && currentMinute == 48)
             {
                 digitalWrite(relay, HIGH);
             } 
@@ -184,6 +196,18 @@ void loop()
             {
                 digitalWrite(relay, LOW);
             } else if (currentHour == 18 && currentMinute == 3)
+            {
+                digitalWrite(relay, HIGH);
+            } else if (currentHour == 18 && currentMinute == 30)
+            {
+                digitalWrite(relay, LOW);
+            } else if (currentHour == 18 && currentMinute == 33)
+            {
+                digitalWrite(relay, HIGH);
+            } else if (currentHour == 18 && currentMinute == 45)
+            {
+                digitalWrite(relay, LOW);
+            } else if (currentHour == 18 && currentMinute == 48)
             {
                 digitalWrite(relay, HIGH);
             } else if (currentHour == 20 && currentMinute == 0)

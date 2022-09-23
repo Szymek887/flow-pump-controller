@@ -20,8 +20,8 @@ jobs:
     - name: Rename platformio.ini
       run: mv platformio.ini.example platformio.ini
 
-    - name: Rename Secrets.h
-      run: mv src/Secrets.h.example src/Secrets.h
+    - name: Rename secrets.h
+      run: mv src/secrets.h.example src/secrets.h
 
     - name: Set up Python
       uses: actions/setup-python@v1

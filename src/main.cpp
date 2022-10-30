@@ -53,6 +53,10 @@ void turnOn()
         WebSerial.print("Pump turned on at: ");
         WebSerial.print(currentHour);
         WebSerial.print(":");
+        if(currentMinute < 10)
+        {
+            WebSerial.print("0");
+        }
         WebSerial.println(currentMinute);
         savedTime = actualTime;
         pumpOn = true;
@@ -65,6 +69,10 @@ void turnOff()
     WebSerial.print("Pump turned off at: ");
     WebSerial.print(currentHour);
     WebSerial.print(":");
+    if(currentMinute < 10)
+    {
+        WebSerial.print("0");
+    }
     WebSerial.println(currentMinute);
     pumpOn = false;
 }

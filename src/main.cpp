@@ -45,12 +45,12 @@ unsigned long savedTime = 0;
 
 bool pumpOn = false;
 // function used to turn pump on when button is pressed
-void manualTurnOn()
+void turnOn()
 {
     if(pumpOn == false)
     {
         digitalWrite(relay, LOW);
-        WebSerial.print("Pump manually turned on at: ");
+        WebSerial.print("Pump turned on at: ");
         WebSerial.print(currentHour);
         WebSerial.print(":");
         WebSerial.println(currentMinute);
@@ -119,7 +119,7 @@ void loop()
     // check physical button
     if(buttonState == LOW)
     {
-        manualTurnOn();
+        turnOn();
     }
 
     // if manually turned on count to turn off
@@ -140,109 +140,58 @@ void loop()
         {  
             if(currentHour == 5 && currentMinute == 45)
             {
-                digitalWrite(relay, LOW);
-            } else if (currentHour == 5 && currentMinute == 48)
-            {
-                digitalWrite(relay, HIGH);
+                turnOn();
             } else if (currentHour == 7 && currentMinute == 15)
             {
-                digitalWrite(relay, LOW);
-            } else if (currentHour == 7 && currentMinute == 18)
-            {
-                digitalWrite(relay, HIGH);
+                turnOn();
             } else if (currentHour == 15 && currentMinute == 0)
             {
-                digitalWrite(relay, LOW);
-            } else if (currentHour == 15 && currentMinute == 5)
-            {
-                digitalWrite(relay, HIGH);
+                turnOn();
             } else if (currentHour == 18 && currentMinute == 0)
             {
-                digitalWrite(relay, LOW);
-            } else if (currentHour == 18 && currentMinute == 3)
-            {
-                digitalWrite(relay, HIGH);
+                turnOn();
             } else if (currentHour == 18 && currentMinute == 30)
             {
-                digitalWrite(relay, LOW);
-            } else if (currentHour == 18 && currentMinute == 33)
-            {
-                digitalWrite(relay, HIGH);
+                turnOn();
             } else if (currentHour == 18 && currentMinute == 45)
             {
-                digitalWrite(relay, LOW);
-            } else if (currentHour == 18 && currentMinute == 48)
-            {
-                digitalWrite(relay, HIGH);
+                turnOn();
             } else if (currentHour == 20 && currentMinute == 30)
             {
-                digitalWrite(relay, LOW);
-            } else if (currentHour == 20 && currentMinute == 33)
-            {
-                digitalWrite(relay, HIGH);
+                turnOn();
             } else if (currentHour == 22 && currentMinute == 45)
             {
-                digitalWrite(relay, LOW);
-            } else if (currentHour == 22 && currentMinute == 48)
-            {
-                digitalWrite(relay, HIGH);
+                turnOn();
             } 
         } else if(currentDay == 0 || currentDay == 6)
         {
             if(currentHour == 6 && currentMinute == 45)
             {
-                digitalWrite(relay, LOW);
-            } else if (currentHour == 6 && currentMinute == 48)
-            {
-                digitalWrite(relay, HIGH);
+                turnOn();
             } else if (currentHour == 10 && currentMinute == 0)
             {
-                digitalWrite(relay, LOW);
-            } else if (currentHour == 10 && currentMinute == 3)
-            {
-                digitalWrite(relay, HIGH);
+                turnOn();
             } else if (currentHour == 12 && currentMinute == 0)
             {
-                digitalWrite(relay, LOW);
-            } else if (currentHour == 12 && currentMinute == 3)
-            {
-                digitalWrite(relay, HIGH);
+                turnOn();
             } else if (currentHour == 15 && currentMinute == 0)
             {
-                digitalWrite(relay, LOW);
-            } else if (currentHour == 15 && currentMinute == 3)
-            {
-                digitalWrite(relay, HIGH);
+                turnOn();
             } else if (currentHour == 18 && currentMinute == 0)
             {
-                digitalWrite(relay, LOW);
-            } else if (currentHour == 18 && currentMinute == 3)
-            {
-                digitalWrite(relay, HIGH);
+                turnOn();
             } else if (currentHour == 18 && currentMinute == 30)
             {
-                digitalWrite(relay, LOW);
-            } else if (currentHour == 18 && currentMinute == 33)
-            {
-                digitalWrite(relay, HIGH);
+                turnOn();
             } else if (currentHour == 18 && currentMinute == 45)
             {
-                digitalWrite(relay, LOW);
-            } else if (currentHour == 18 && currentMinute == 48)
-            {
-                digitalWrite(relay, HIGH);
+                turnOn();
             } else if (currentHour == 20 && currentMinute == 0)
             {
-                digitalWrite(relay, LOW);
-            } else if (currentHour == 20 && currentMinute == 3)
-            {
-                digitalWrite(relay, HIGH);
+                turnOn();
             } else if (currentHour == 22 && currentMinute == 0)
             {
-                digitalWrite(relay, LOW);
-            } else if (currentHour == 22 && currentMinute == 3)
-            {
-                digitalWrite(relay, HIGH);
+                turnOn();
             }
         } 
 }

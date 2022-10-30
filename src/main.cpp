@@ -112,6 +112,13 @@ void loop()
     
     // sync time for delay()
     actualTime = millis();
+
+    // sync real world time
+    timeClient.update();
+    currentHour = timeClient.getHours();
+    currentMinute = timeClient.getMinutes();
+    currentDay = timeClient.getDay();
+    //0-niedziela 1-poniedzialek 2-wtorek 3-sroda 4-czwartek 5-piatek 6-sobota
     
     // logic for buttons for manual control
     buttonState = digitalRead(buttonPin);
@@ -127,13 +134,6 @@ void loop()
     {
         turnOff();
     }
-
-    // sync real world time
-    timeClient.update();
-    currentHour = timeClient.getHours();
-    currentMinute = timeClient.getMinutes();
-    currentDay = timeClient.getDay();
-    //0-niedziela 1-poniedzialek 2-wtorek 3-sroda 4-czwartek 5-piatek 6-sobota
     
     //logic for time checking and automatic control of pump
     if(currentDay >= 1 && currentDay <= 5)

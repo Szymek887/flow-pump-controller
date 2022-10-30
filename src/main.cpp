@@ -4,7 +4,11 @@
 #include <WiFiUdp.h>
 #include <secrets.h>
 #include <ArduinoOTA.h>
-#include <ESP8266WebServer.h>
+
+// WebSerial libraries
+#include <ESPAsyncTCP.h>
+#include <ESPAsyncWebServer.h>
+#include <WebSerial.h>
 
 // variable declaring ip address
 IPAddress localIP(10, 0, 8, 71);
@@ -17,10 +21,10 @@ const char* hostname = "flow-pump-controller";
 
 // variables declaring NTP server
 WiFiUDP ntpUDP;
-NTPClient timeClient(ntpUDP, "pool.ntp.org", 7200);
+NTPClient timeClient(ntpUDP, "pool.ntp.org", 3600);
 
-// variable declaring api server
-ESP8266WebServer rest_server(8080);
+// variable declaring WebSerial server
+AsyncWebServer server(80);
 
 // variables declaring pin numbers
 const int relay = 5;
@@ -38,13 +42,23 @@ int currentDay;
 unsigned long actualTime = 0;
 unsigned long savedTime = 0;
 
+
+bool pumpOn = false;
 // function used to turn pump on when button is pressed
 void manualTurnOn()
 {
-    digitalWrite(relay, LOW);
+    if(pumpOn == false)
+    {
+        digitalWrite(relay, LOW);
+        WebSerial.print("Pump manually turned on at: ");
+        WebSerial.print(currentHour);
+        WebSerial.print(":");
+        WebSerial.println(currentMinute);
+        savedTime = actualTime;
+        pumpOn = true;
+    }
 
-    delay(180000);
-    digitalWrite(relay, HIGH);
+    // delay(180000);
 } 
 
 void setup()
@@ -78,20 +92,13 @@ void setup()
 
     ArduinoOTA.begin();
 
-    // initialize api server
-    rest_server.on("/", HTTP_GET, []() {
-        rest_server.send(200, F("text/html"),
-            F("Pump turned on!"));
-        manualTurnOn();
-    });
-    rest_server.begin();
+    // initialize WebSerial server
+    WebSerial.begin(&server);
+    server.begin();
 }
 
 void loop()
 {
-    // check for api requests
-    rest_server.handleClient();
-    
     // check for ArduinoOTA updates
     ArduinoOTA.handle();
     
@@ -105,6 +112,17 @@ void loop()
     if(buttonState == LOW)
     {
         manualTurnOn();
+    }
+
+    // if manually turned on count to turn off
+    if(actualTime - savedTime > 30000 && pumpOn == true)
+    {
+        digitalWrite(relay, HIGH);
+        WebSerial.print("Pump turned off at: ");
+        WebSerial.print(currentHour);
+        WebSerial.print(":");
+        WebSerial.println(currentMinute);
+        pumpOn = false;
     }
  
     // sync real world time

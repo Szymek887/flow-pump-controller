@@ -57,9 +57,17 @@ void manualTurnOn()
         savedTime = actualTime;
         pumpOn = true;
     }
-
-    // delay(180000);
 } 
+
+void turnOff()
+{
+    digitalWrite(relay, HIGH);
+    WebSerial.print("Pump turned off at: ");
+    WebSerial.print(currentHour);
+    WebSerial.print(":");
+    WebSerial.println(currentMinute);
+    pumpOn = false;
+}
 
 void setup()
 {   
@@ -117,12 +125,7 @@ void loop()
     // if manually turned on count to turn off
     if(actualTime - savedTime > 30000 && pumpOn == true)
     {
-        digitalWrite(relay, HIGH);
-        WebSerial.print("Pump turned off at: ");
-        WebSerial.print(currentHour);
-        WebSerial.print(":");
-        WebSerial.println(currentMinute);
-        pumpOn = false;
+        turnOff();
     }
  
     // sync real world time

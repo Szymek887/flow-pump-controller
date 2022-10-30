@@ -127,7 +127,7 @@ void loop()
     {
         turnOff();
     }
- 
+
     // sync real world time
     timeClient.update();
     currentHour = timeClient.getHours();
@@ -136,62 +136,62 @@ void loop()
     //0-niedziela 1-poniedzialek 2-wtorek 3-sroda 4-czwartek 5-piatek 6-sobota
     
     //logic for time checking and automatic control of pump
-        if(currentDay >= 1 && currentDay <= 5)
-        {  
-            if(currentHour == 5 && currentMinute == 45)
-            {
-                turnOn();
-            } else if (currentHour == 7 && currentMinute == 15)
-            {
-                turnOn();
-            } else if (currentHour == 15 && currentMinute == 0)
-            {
-                turnOn();
-            } else if (currentHour == 18 && currentMinute == 0)
-            {
-                turnOn();
-            } else if (currentHour == 18 && currentMinute == 30)
-            {
-                turnOn();
-            } else if (currentHour == 18 && currentMinute == 45)
-            {
-                turnOn();
-            } else if (currentHour == 20 && currentMinute == 30)
-            {
-                turnOn();
-            } else if (currentHour == 22 && currentMinute == 45)
-            {
-                turnOn();
-            } 
-        } else if(currentDay == 0 || currentDay == 6)
+    if(currentDay >= 1 && currentDay <= 5)
+    {  
+        if(currentHour == 5 && currentMinute == 45)
         {
-            if(currentHour == 6 && currentMinute == 45)
-            {
-                turnOn();
-            } else if (currentHour == 10 && currentMinute == 0)
-            {
-                turnOn();
-            } else if (currentHour == 12 && currentMinute == 0)
-            {
-                turnOn();
-            } else if (currentHour == 15 && currentMinute == 0)
-            {
-                turnOn();
-            } else if (currentHour == 18 && currentMinute == 0)
-            {
-                turnOn();
-            } else if (currentHour == 18 && currentMinute == 30)
-            {
-                turnOn();
-            } else if (currentHour == 18 && currentMinute == 45)
-            {
-                turnOn();
-            } else if (currentHour == 20 && currentMinute == 0)
-            {
-                turnOn();
-            } else if (currentHour == 22 && currentMinute == 0)
-            {
-                turnOn();
-            }
+            turnOn();
+        } else if (currentHour == 7 && currentMinute == 15)
+        {
+            turnOn();
+        } else if (currentHour == 15 && currentMinute == 0)
+        {
+            turnOn();
+        } else if (currentHour == 18 && currentMinute == 0)
+        {
+            turnOn();
+        } else if (currentHour == 18 && currentMinute == 30)
+        {
+            turnOn();
+        } else if (currentHour == 18 && currentMinute == 45)
+        {
+            turnOn();
+        } else if (currentHour == 20 && currentMinute == 30)
+        {
+            turnOn();
+        } else if (currentHour == 22 && currentMinute == 45)
+        {
+            turnOn();
         } 
+    } else if(currentDay == 0 || currentDay == 6)
+    {
+        if(currentHour == 6 && currentMinute == 45)
+        {
+            turnOn();
+        } else if (currentHour == 10 && currentMinute == 0)
+        {
+            turnOn();
+        } else if (currentHour == 12 && currentMinute == 0)
+        {
+            turnOn();
+        } else if (currentHour == 15 && currentMinute == 0)
+        {
+            turnOn();
+        } else if (currentHour == 18 && currentMinute == 0)
+        {
+            turnOn();
+        } else if (currentHour == 18 && currentMinute == 30)
+        {
+            turnOn();
+        } else if (currentHour == 18 && currentMinute == 45)
+        {
+            turnOn();
+        } else if (currentHour == 20 && currentMinute == 0)
+        {
+            turnOn();
+        } else if (currentHour == 22 && currentMinute == 0)
+        {
+            turnOn();
+        }
+    } 
 }

@@ -123,7 +123,7 @@ void loop()
     }
 
     // if manually turned on count to turn off
-    if(actualTime - savedTime > 30000 && pumpOn == true)
+    if(actualTime - savedTime > 180000 && pumpOn == true)
     {
         turnOff();
     }

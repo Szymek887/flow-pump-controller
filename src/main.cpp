@@ -19,9 +19,12 @@ IPAddress secondaryDNS(10, 0, 8, 1);
 
 const char* hostname = "flow-pump-controller";
 
+// variable declaring time offset
+int timeZone = 1;
+
 // variables declaring NTP server
 WiFiUDP ntpUDP;
-NTPClient timeClient(ntpUDP, "pool.ntp.org", 3600);
+NTPClient timeClient(ntpUDP, "pool.ntp.org", timeZone * 3600);
 
 // variable declaring WebSerial server
 AsyncWebServer server(80);

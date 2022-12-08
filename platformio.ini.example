@@ -19,3 +19,5 @@ lib_deps =
 	ottowinter/ESPAsyncWebServer-esphome@^2.1.0
 	ottowinter/ESPAsyncTCP-esphome@^1.2.3
 upload_protocol = espota
+upload_port = ip_address
+upload_flags = --auth=ota_passwd

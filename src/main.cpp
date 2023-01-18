@@ -93,7 +93,7 @@ void setup()
     ArduinoOTA.begin();
 
     // initialize api server
-    rest_server.on("/", HTTP_GET, []() {
+    rest_server.on("/turnon", HTTP_GET, []() {
         rest_server.send(200, F("text/html"),
             F("Pump turned on!"));
         turnOn();

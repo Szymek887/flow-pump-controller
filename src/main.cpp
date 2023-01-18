@@ -5,10 +5,7 @@
 #include <secrets.h>
 #include <ArduinoOTA.h>
 
-// WebSerial libraries
-#include <ESPAsyncTCP.h>
-#include <ESPAsyncWebServer.h>
-#include <WebSerial.h>
+#include <ESP8266WebServer.h>
 
 // variable declaring ip address
 IPAddress localIP(10, 0, 8, 71);
@@ -26,8 +23,8 @@ int timeZone = 1;
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "pool.ntp.org", timeZone * 3600);
 
-// variable declaring WebSerial server
-AsyncWebServer server(80);
+// variable declaring api server
+ESP8266WebServer rest_server(8080);
 
 // variables declaring pin numbers
 const int relay = 5;
@@ -53,14 +50,6 @@ void turnOn()
     if(pumpOn == false)
     {
         digitalWrite(relay, LOW);
-        WebSerial.print("Pump turned on at: ");
-        WebSerial.print(currentHour);
-        WebSerial.print(":");
-        if(currentMinute < 10)
-        {
-            WebSerial.print("0");
-        }
-        WebSerial.println(currentMinute);
         savedTime = actualTime;
         pumpOn = true;
     }
@@ -69,20 +58,12 @@ void turnOn()
 void turnOff()
 {
     digitalWrite(relay, HIGH);
-    WebSerial.print("Pump turned off at: ");
-    WebSerial.print(currentHour);
-    WebSerial.print(":");
-    if(currentMinute < 10)
-    {
-        WebSerial.print("0");
-    }
-    WebSerial.println(currentMinute);
     pumpOn = false;
 }
 
 void setup()
 {   
-    Serial.begin(115200);
+    Serial.begin(9600);
     
     // establish Wi-Fi connection
     WiFi.config(localIP, gateway, subnet, primaryDNS, secondaryDNS);
@@ -111,9 +92,13 @@ void setup()
 
     ArduinoOTA.begin();
 
-    // initialize WebSerial server
-    WebSerial.begin(&server);
-    server.begin();
+    // initialize api server
+    rest_server.on("/", HTTP_GET, []() {
+        rest_server.send(200, F("text/html"),
+            F("Pump turned on!"));
+        turnOn();
+    });
+    rest_server.begin();
 }
 
 void loop()
@@ -139,6 +124,9 @@ void loop()
     {
         turnOn();
     }
+
+    // check for api requests
+    rest_server.handleClient();
 
     // if manually turned on count to turn off
     if(actualTime - savedTime > 180000 && pumpOn == true)

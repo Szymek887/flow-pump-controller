@@ -41,19 +41,24 @@ int currentDay;
 // variables used instead of delay()
 unsigned long actualTime = 0;
 unsigned long savedTime = 0;
+unsigned long lastTimeTurnedOn = 0;
 
-
+// check if pump is on and if is ready to turn on (delay between uses)
 bool pumpOn = false;
+bool readyToTurnOn = true;
+
 // function used to turn pump on when button is pressed
 void turnOn()
 {
-    if(pumpOn == false)
+    if(pumpOn == false && readyToTurnOn == true)
     {
         digitalWrite(relay, LOW);
         savedTime = actualTime;
+        lastTimeTurnedOn = actualTime;
         pumpOn = true;
+        readyToTurnOn = false;
     }
-} 
+}
 
 void turnOff()
 {
@@ -132,6 +137,10 @@ void loop()
     if(actualTime - savedTime > 180000 && pumpOn == true)
     {
         turnOff();
+    }
+
+    if(actualTime - lastTimeTurnedOn > 1800000 && readyToTurnOn == false) {
+        readyToTurnOn = true;
     }
     
     //logic for time checking and automatic control of pump

@@ -140,55 +140,25 @@ void loop()
         if(currentHour == 5 && currentMinute == 45)
         {
             turnOn();
-        } else if (currentHour == 7 && currentMinute == 15)
-        {
-            turnOn();
-        } else if (currentHour == 15 && currentMinute == 0)
-        {
-            turnOn();
-        } else if (currentHour == 18 && currentMinute == 0)
+        } else if (currentHour == 13 && currentMinute == 0)
         {
             turnOn();
         } else if (currentHour == 18 && currentMinute == 30)
         {
             turnOn();
-        } else if (currentHour == 18 && currentMinute == 45)
-        {
-            turnOn();
-        } else if (currentHour == 20 && currentMinute == 30)
-        {
-            turnOn();
-        } else if (currentHour == 22 && currentMinute == 45)
-        {
-            turnOn();
-        } 
+        }
     } else if(currentDay == 0 || currentDay == 6)
     {
-        if(currentHour == 6 && currentMinute == 45)
-        {
-            turnOn();
-        } else if (currentHour == 10 && currentMinute == 0)
+        if(currentHour == 7 && currentMinute == 0)
         {
             turnOn();
         } else if (currentHour == 12 && currentMinute == 0)
         {
             turnOn();
-        } else if (currentHour == 15 && currentMinute == 0)
-        {
-            turnOn();
-        } else if (currentHour == 18 && currentMinute == 0)
-        {
-            turnOn();
         } else if (currentHour == 18 && currentMinute == 30)
         {
             turnOn();
-        } else if (currentHour == 18 && currentMinute == 45)
-        {
-            turnOn();
         } else if (currentHour == 20 && currentMinute == 0)
-        {
-            turnOn();
-        } else if (currentHour == 22 && currentMinute == 0)
         {
             turnOn();
         }
